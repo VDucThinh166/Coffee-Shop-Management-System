@@ -1,0 +1,35 @@
+# Django Core
+Django==4.2.17
+djangorestframework==3.15.2
+django-cors-headers==4.6.0
+
+# JWT Authentication
+djangorestframework-simplejwt==5.4.0
+PyJWT==2.10.1
+
+# Password hashing
+bcrypt==4.3.0
+
+# MySQL
+mysqlclient==2.2.7
+
+# Environment Variables
+python-decouple==3.8
+
+# Image Processing (menu items, etc.)
+Pillow==11.1.0
+
+# API Documentation
+drf-spectacular==0.28.0
+
+# Filtering & Search
+django-filter==24.3
+
+# Development & Debug
+django-debug-toolbar==4.4.6
+
+# WSGI Server (production)
+gunicorn==23.0.0
+
+# Utilities
+python-dateutil==2.9.0

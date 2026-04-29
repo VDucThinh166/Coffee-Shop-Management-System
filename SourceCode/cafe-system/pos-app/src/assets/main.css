@@ -1,0 +1,34 @@
+/* POS App - Global Styles */
+
+:root {
+  --primary: #6F4E37;
+  --primary-light: #A0785A;
+  --primary-dark: #4A3423;
+  --secondary: #D4A574;
+  --accent: #C8860A;
+  --bg-dark: #1A1A2E;
+  --bg-light: #F5F0EB;
+  --text-primary: #2D2D2D;
+  --text-secondary: #6B6B6B;
+  --success: #27AE60;
+  --warning: #F39C12;
+  --danger: #E74C3C;
+  --border-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+#app {
+  min-height: 100vh;
+}
