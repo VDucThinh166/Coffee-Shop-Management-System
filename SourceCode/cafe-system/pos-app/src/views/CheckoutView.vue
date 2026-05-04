@@ -79,6 +79,7 @@ onMounted(() => {
     return;
   }
   fetchPromotions();
+  calculateMockDiscount();
 });
 
 const fetchPromotions = async () => {
@@ -97,10 +98,14 @@ const subtotal = computed(() => {
 });
 
 const calculateMockDiscount = () => {
-  // Logic giả lập hiển thị dựa theo Decision Table (Backend sẽ tính chuẩn xác)
+  const isVip = orderStore.currentCustomerTier && orderStore.currentCustomerTier !== 'Đồng';
   let percent = 0;
-  if (subtotal.value >= 500000 && selectedVoucher.value) percent = 15; // Giả lập KH thường
+  
+  if (subtotal.value >= 500000 && isVip && selectedVoucher.value) percent = 20;
+  else if (subtotal.value >= 500000 && selectedVoucher.value) percent = 15;
   else if (subtotal.value >= 500000) percent = 10;
+  else if (isVip) percent = 5;
+  
   discountPercent.value = percent;
 };
 

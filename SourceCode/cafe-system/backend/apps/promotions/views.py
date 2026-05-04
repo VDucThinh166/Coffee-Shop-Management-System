@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.authentication.authentication import CustomJWTAuthentication
-from apps.authentication.permissions import IsQuanLy
+from apps.authentication.permissions import IsQuanLy, IsQuanLyOrNhanVien
 from .models import KhuyenMai
 from .serializers import KhuyenMaiSerializer
 
@@ -82,7 +82,7 @@ class ActivePromotionsView(APIView):
     Điều kiện: is_active=True, ngay_bd <= today <= ngay_kt
     """
     authentication_classes = [CustomJWTAuthentication]
-    permission_classes = [IsQuanLy]  # Hoặc Nhân viên nếu cần, nhưng đề ghi Management only
+    permission_classes = [IsQuanLyOrNhanVien]  # Nhân viên POS cần lấy voucher cho màn hình checkout
 
     def get(self, request):
         today = timezone.localtime().date()
