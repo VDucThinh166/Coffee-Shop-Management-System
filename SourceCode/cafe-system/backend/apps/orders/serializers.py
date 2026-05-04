@@ -20,6 +20,7 @@ class ChiTietHoaDonSerializer(serializers.ModelSerializer):
 class HoaDonSerializer(serializers.ModelSerializer):
     nhan_vien_lap = serializers.CharField(source='ma_nv.ho_ten', read_only=True)
     ten_khach_hang = serializers.CharField(source='sdt_khach.ho_ten', read_only=True)
+    hang_khach_hang = serializers.CharField(source='sdt_khach.hang_tv', read_only=True, default=None)
     chi_tiet = ChiTietHoaDonSerializer(many=True, read_only=True)
     trang_thai_ban = serializers.IntegerField(source='ma_ban.trang_thai', read_only=True)
 
@@ -34,6 +35,7 @@ class HoaDonSerializer(serializers.ModelSerializer):
             'trang_thai_ban',
             'sdt_khach',
             'ten_khach_hang',
+            'hang_khach_hang',
             'tong_tien',
             'phuong_thuc',
             'trang_thai',

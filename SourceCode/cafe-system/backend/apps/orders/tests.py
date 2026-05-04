@@ -15,6 +15,8 @@ from apps.tables.models import Ban
 from apps.menu.models import ThucDon
 from apps.promotions.models import KhuyenMai
 from apps.orders.models import HoaDon, ChiTietHoaDon
+from apps.orders.services import calculate_total
+from decimal import Decimal
 
 
 class OrdersTests(TestCase):
@@ -139,3 +141,31 @@ class OrdersTests(TestCase):
         # Final = 450k -> 45 điểm
         self.assertEqual(self.kh_thuong.diem_tich_luy, 45)
         self.assertEqual(self.kh_thuong.hang_tv, KhachHang.HangThanhVien.DONG) # 45 < 500
+
+class CalculateTotalTests(TestCase):
+    """Unit test riêng cho hàm calculate_total() — Bảng quyết định C3"""
+    
+    def test_case1_gte500k_vip_voucher_20(self):
+        final, pct = calculate_total(Decimal('500000'), True, True)
+        self.assertEqual(pct, 20)
+        self.assertEqual(final, Decimal('400000'))
+
+    def test_case2_gte500k_voucher_15(self):
+        final, pct = calculate_total(Decimal('500000'), False, True)
+        self.assertEqual(pct, 15)
+        self.assertEqual(final, Decimal('425000'))
+
+    def test_case3_gte500k_only_10(self):
+        final, pct = calculate_total(Decimal('500000'), False, False)
+        self.assertEqual(pct, 10)
+        self.assertEqual(final, Decimal('450000'))
+
+    def test_case4_vip_only_5(self):
+        final, pct = calculate_total(Decimal('100000'), True, False)
+        self.assertEqual(pct, 5)
+        self.assertEqual(final, Decimal('95000'))
+
+    def test_case5_normal_0(self):
+        final, pct = calculate_total(Decimal('100000'), False, False)
+        self.assertEqual(pct, 0)
+        self.assertEqual(final, Decimal('100000'))
