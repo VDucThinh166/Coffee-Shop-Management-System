@@ -103,7 +103,6 @@ const refreshOrder = async () => {
     const res = await api.get(`/api/orders/${orderStore.currentOrderId}/`);
     if (res.data.success) {
       orderStore.orderItems = res.data.data.chi_tiet;
-      orderStore.currentCustomerTier = res.data.data.hang_khach_hang;
     }
   } catch (err) {
     console.error(err);

@@ -97,7 +97,7 @@ const handleTableClick = async (ban) => {
     try {
       const res = await api.post('/api/orders/', { ma_ban: ban.ma_ban });
       if (res.data.success) {
-        orderStore.setOrder(ban.ma_ban, res.data.data.ma_hd, [], res.data.data.hang_khach_hang);
+        orderStore.setOrder(ban.ma_ban, res.data.data.ma_hd, []);
         router.push('/order');
       }
     } catch (err) {
@@ -109,7 +109,7 @@ const handleTableClick = async (ban) => {
       const res = await api.get(`/api/orders/?ban=${ban.ma_ban}&trang_thai=Chờ pha chế`);
       if (res.data.success && res.data.data.length > 0) {
         const order = res.data.data[0];
-        orderStore.setOrder(ban.ma_ban, order.ma_hd, order.chi_tiet, order.hang_khach_hang);
+        orderStore.setOrder(ban.ma_ban, order.ma_hd, order.chi_tiet);
         router.push('/order');
       } else {
         alert("Không tìm thấy hóa đơn mở cho bàn này!");

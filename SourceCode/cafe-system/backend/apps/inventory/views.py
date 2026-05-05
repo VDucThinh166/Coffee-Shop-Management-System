@@ -126,6 +126,7 @@ class NhapKhoView(APIView):
 
         ngay_nhap = serializer.validated_data['ngay_nhap']
         chi_tiet_list = serializer.validated_data['chi_tiet']
+        ma_nv = request.user.nhan_vien  # Sẽ throw lỗi nếu user ko có NhanVien, cần try-except
 
         try:
             nv = request.user.nhan_vien
